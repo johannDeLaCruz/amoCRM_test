@@ -10,6 +10,7 @@ async function fetchDeals() {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     });
     console.log(response.data);
