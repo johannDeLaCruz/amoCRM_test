@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>hello</h1>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>amoCRM Frontend Test</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container mx-auto mt-10">
+  <h1 class="text-3xl font-bold mb-5">amoCRM Deals</h1>
+
+  <!-- Table to display deals -->
+  <table id="deals-table" class="table-auto w-full">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Deal Name</th>
+        <th class="px-4 py-2">Budget</th>
+        <th class="px-4 py-2">Created At</th>
+        <th class="px-4 py-2">Updated At</th>
+        <th class="px-4 py-2">Responsible</th>
+      </tr>
+    </thead>
+    <tbody id="deals-body">
+      <!-- Deals data will be populated here -->
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div id="pagination" class="mt-5">
+    <!-- Pagination buttons will be added dynamically here -->
+  </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="app.js"></script>
+</body>
 </html>
