@@ -9,6 +9,7 @@ async function fetchDeals() {
     const response = await axios.get(`${API_URL}/api/v4/leads`, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
+        
       },
     });
     console.log(response.data);
