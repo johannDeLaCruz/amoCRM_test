@@ -1,4 +1,4 @@
-import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
+import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const API_URL = "https://johanndelacruz2023.amocrm.ru";
 const ACCESS_TOKEN =
@@ -9,7 +9,7 @@ async function fetchDeals() {
     const response = await axios.get(`${API_URL}/api/v4/leads`, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
-        
+        "Content-Type": "application/json",
       },
     });
     console.log(response.data);
