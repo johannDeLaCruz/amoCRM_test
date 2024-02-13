@@ -8,7 +8,7 @@ async function fetchDeals() {
   try {
     const response = await axios.get(`${API_URL}/api/v4/leads`, {
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        "Authorization": `Bearer ${ACCESS_TOKEN}`,
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
