@@ -5,7 +5,15 @@ let url = `https://${subdomain}.amocrm.ru/${endpoint}`;
 let headersList = {
   Accept: "*/*",
   "Content-Type": "application/json",
-  "User-Agent": "amoCRM-oAuth-client/1.0",
+  // "User-Agent": "amoCRM-oAuth-client/1.0",
+  // "X-Requested-With": "XMLHttpRequest",
+  // "Access-Control-Allow-Origin": "*",
+  // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  // "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  // "Access-Control-Allow-Credentials": "true",
+  // "Access-Control-Max-Age": "86400",
+  // "Access-Control-Expose-Headers": "Content-Length, X-JSON",
+  mode: "no-cors",
   Authorization:
     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ4ZTUxNDdiMDJmZWY4ZGUxMDI4Njg3OWRkYWFmM2Y3NGYxMTA3YzM5NGU5ZDMyZjk2NGZkZWRjOGM1NTkwMDA4ZGYyZTc3MjMxMmQ3NmQwIn0.eyJhdWQiOiJjM2QzMWY4Zi1jODY1LTQxMDgtYTdkMS0yYzE1N2U2MGYyOTQiLCJqdGkiOiI0OGU1MTQ3YjAyZmVmOGRlMTAyODY4NzlkZGFhZjNmNzRmMTEwN2MzOTRlOWQzMmY5NjRmZGVkYzhjNTU5MDAwOGRmMmU3NzIzMTJkNzZkMCIsImlhdCI6MTcwNzg3ODUyNywibmJmIjoxNzA3ODc4NTI3LCJleHAiOjE3NDc4NzIwMDAsInN1YiI6IjEwNjY0MzM0IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMxNTY0NDEwLCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiOTliNDBlYjAtNWFiMS00Nzc3LWE0M2ItZGRhNmYwMTQ2OGQyIn0.qLlZBWRVd5DHO5fK4RVooCC8AFqX_ew1IbE2bG4GSbT3qV1JIheG98R4yNCfi9kIq6YdQ-aAo-AQEWMeQhpcEBLn2pZxHh-rCXtXj4R9Q74hJYrb2U7YFewApyuu5K4pbAoHze86G4ihB8YDou4Mu7owIbAxDv3-Z2xFyY53QCjspitKNoMenHncwCQm4V8SyQdRLBzsAvnwJthPFVPw1IXVDLvgKgDrF5N7m3qAhsPJHyNPNvGiUrL9-UtSKmFN6KelaFcezGLDxMOBGZ-RXQ8UV3Jqg5i6ve74t1vUf6WO2kMJpKG6iETJlMN1JElae7Pksi4Y5mHPgrGE7AfeoQ",
 };
