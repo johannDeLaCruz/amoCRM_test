@@ -3,62 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>amoCRM JohannDeLaCruz2023 - СДЕЛКИ</title>
-    <!-- Include Tailwind CSS -->
+    <title>amoCRM JohannDeLaCruz2023 - СДЕЛКИ</title>    
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
   </head>
-  <body>
-    <div class="container mx-auto mt-10">
+  <body class="bg-gray-100 font-sans">
+    <div class="container mx-auto mt-10 px-4">
       <h1 class="text-3xl font-bold mb-5 text-center">
         JohannDeLaCruz - amoCRM Deals
       </h1>
-      <div>
-        <label for="items-per-page">Показать:</label>
-        <select id="items-per-page">
-          <option value="2">2</option>
-          <option value="5" selected>5</option>
-          <option value="10">10</option>
-          <option value="all">Все</option>
-        </select>
-      </div>
-      <div>
-        <label for="order-select">Сортировка:</label>
-        <select id="order-select">
-          <option value="name-asc" selected>Название (А-Я)</option>
-          <option value="name-desc">Название (Я-А)</option>
-          <option value="price-asc">Бюджет (0-9)</option>
-          <option value="price-desc">Бюджет (9-0)</option>
-        </select>
+      <div class="flex justify-center mb-5">
+        <div class="mr-3">
+          <label for="items-per-page" class="mr-1">Показать:</label>
+          <select
+            id="items-per-page"
+            class="border border-gray-300 rounded px-3 py-1"
+          >
+            <option value="2">2</option>
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="all">Все</option>
+          </select>
+        </div>
+        <div>
+          <label for="order-select" class="mr-1">Сортировка:</label>
+          <select
+            id="order-select"
+            class="border border-gray-300 rounded px-3 py-1"
+          >
+            <option value="name-asc" selected>Название (А-Я)</option>
+            <option value="name-desc">Название (Я-А)</option>
+            <option value="price-asc">Бюджет (0-9)</option>
+            <option value="price-desc">Бюджет (9-0)</option>
+          </select>
+        </div>
       </div>
       <!-- Table to display deals -->
-      <table id="deals-table" class="table-auto w-full">
-        <thead>
-          <tr>
-            <th class="px-4 py-2">ID сделки</th>
-            <th class="px-4 py-2">Название сделки</th>
-            <th class="px-4 py-2">Бюджет сделки</th>
-            <th class="px-4 py-2">ID пользователя, ответственного за сделку</th>
-            <th class="px-4 py-2">ID группы</th>
-            <th class="px-4 py-2">ID статуса</th>
-            <th class="px-4 py-2">ID воронки</th>
-            <th class="px-4 py-2">ID пользователя, создающий сделку</th>
-            <th class="px-4 py-2">ID пользователя, изменяющий сделку</th>
-            <th class="px-4 py-2">Дата создания сделки</th>
-            <th class="px-4 py-2">Дата изменения сделки</th>
-            <th class="px-4 py-2">ID аккаунта, в котором находится сделка</th>
-          </tr>
-        </thead>
-        <tbody id="deals-body">
-          <!-- Deals data will be populated here -->
-        </tbody>
-      </table>
+      <div class="-mx-4">
+        <table
+          id="deals-table"
+          class="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden"
+        >
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="px-4 py-2">ID сделки</th>
+              <th class="px-4 py-2">Название сделки</th>
+              <th class="px-4 py-2">Бюджет сделки</th>
+              <th class="px-4 py-2">
+                ID пользователя, ответственного за сделку
+              </th>
+              <th class="px-4 py-2">ID группы</th>
+              <th class="px-4 py-2">ID статуса</th>
+              <th class="px-4 py-2">ID воронки</th>
+              <th class="px-4 py-2">ID пользователя, создающий сделку</th>
+              <th class="px-4 py-2">ID пользователя, изменяющий сделку</th>
+              <th class="px-4 py-2">Дата создания сделки</th>
+              <th class="px-4 py-2">Дата изменения сделки</th>
+              <th class="px-4 py-2">ID аккаунта, в котором находится сделка</th>
+            </tr>
+          </thead>
+          <tbody id="deals-body">
+            <!-- Deals data will be populated here -->
+          </tbody>
+        </table>
+      </div>
 
       <!-- Pagination -->
-      <div id="pagination-buttons" class="mt-5">
-        <!-- Pagination buttons will be added dynamically here -->
+      <div id="pagination-buttons" class="mt-5 flex justify-center">        <!-- Pagination buttons will be added dynamically here -->
+      
       </div>
     </div>
 

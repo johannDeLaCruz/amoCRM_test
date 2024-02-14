@@ -43,10 +43,7 @@ async function fetchDeals() {
 
 async function renderDealsTable() {
   let deals = await fetchDeals();
-
-  // Sort deals based on selected order
   deals = sortDeals(deals, sortOrder);
-
   const dealsBody = document.getElementById("deals-body");
   dealsBody.innerHTML = "";
 
@@ -55,28 +52,33 @@ async function renderDealsTable() {
   const endIndex =
     itemsPerPage === Infinity
       ? deals.length
-      : Math.min(startIndex + itemsPerPage, deals.length);  
+      : Math.min(startIndex + itemsPerPage, deals.length);
 
   for (let i = startIndex; i < endIndex; i++) {
     const deal = deals[i];
     const row = document.createElement("tr");
     row.innerHTML = `
-    <td class="border px-4 py-2">${deal.id}</td>
-    <td class="border px-4 py-2">${deal.name}</td>      
-    <td class="border px-4 py-2">${deal.price}</td>
-    <td class="border px-4 py-2">${deal.responsible_user_id}</td>
-    <td class="border px-4 py-2">${deal.group_id}</td>
-    <td class="border px-4 py-2">${deal.status_id}</td>
-    <td class="border px-4 py-2">${deal.pipeline_id}</td>
-    <td class="border px-4 py-2">${deal.created_by}</td>
-    <td class="border px-4 py-2">${deal.updated_by}</td>
-    <td class="border px-4 py-2">${deal.created_at}</td>
-    <td class="border px-4 py-2">${deal.updated_at}</td>      
-    <td class="border px-4 py-2">${deal.account_id}</td>      
-    `;
+            <td class="border px-4 py-2">${deal.id}</td>
+            <td class="border px-4 py-2">${deal.name}</td>      
+            <td class="border px-4 py-2">${deal.price}</td>
+            <td class="border px-4 py-2">${deal.responsible_user_id}</td>
+            <td class="border px-4 py-2">${deal.group_id}</td>
+            <td class="border px-4 py-2">${deal.status_id}</td>
+            <td class="border px-4 py-2">${deal.pipeline_id}</td>
+            <td class="border px-4 py-2">${deal.created_by}</td>
+            <td class="border px-4 py-2">${deal.updated_by}</td>
+            <td class="border px-4 py-2">${deal.created_at}</td>
+            <td class="border px-4 py-2">${deal.updated_at}</td>      
+            <td class="border px-4 py-2">${deal.account_id}</td>      
+        `;
     dealsBody.appendChild(row);
+    row.classList.add(
+      "transition",
+      "ease-in-out",
+      "transform",
+      "hover:bg-gray-50"
+    );
   }
-
   renderPagination(deals.length);
 }
 
@@ -88,6 +90,21 @@ function renderPagination(totalItems) {
   for (let i = 1; i <= totalPages; i++) {
     const button = document.createElement("button");
     button.textContent = i;
+    button.classList.add(
+      "bg-blue-500",
+      "hover:bg-blue-600",
+      "text-white",
+      "font-bold",
+      "py-2",
+      "px-4",
+      "rounded",
+      "focus:outline-none",
+      "focus:shadow-outline",
+      "mx-1"
+    );
+    if (i === currentPage) {
+      button.classList.add("bg-blue-600");
+    }
     button.addEventListener("click", function () {
       currentPage = i;
       renderDealsTable();
