@@ -1,27 +1,31 @@
-let method = "GET";
-let endpoint = "api/v4/leads";
-let subdomain = "johanndelacruz2023";
-let url = `https://${subdomain}.amocrm.ru/${endpoint}`;
-let headersList = {
-  Accept: "*/*",
-  "Content-Type": "application/json",
-  // "User-Agent": "amoCRM-oAuth-client/1.0",
-  // "X-Requested-With": "XMLHttpRequest",
-  // "Access-Control-Allow-Origin": "*",
-  // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  // "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  // "Access-Control-Allow-Credentials": "true",
-  // "Access-Control-Max-Age": "86400",
-  // "Access-Control-Expose-Headers": "Content-Length, X-JSON",
-  mode: "no-cors",
-  Authorization:
-    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ4ZTUxNDdiMDJmZWY4ZGUxMDI4Njg3OWRkYWFmM2Y3NGYxMTA3YzM5NGU5ZDMyZjk2NGZkZWRjOGM1NTkwMDA4ZGYyZTc3MjMxMmQ3NmQwIn0.eyJhdWQiOiJjM2QzMWY4Zi1jODY1LTQxMDgtYTdkMS0yYzE1N2U2MGYyOTQiLCJqdGkiOiI0OGU1MTQ3YjAyZmVmOGRlMTAyODY4NzlkZGFhZjNmNzRmMTEwN2MzOTRlOWQzMmY5NjRmZGVkYzhjNTU5MDAwOGRmMmU3NzIzMTJkNzZkMCIsImlhdCI6MTcwNzg3ODUyNywibmJmIjoxNzA3ODc4NTI3LCJleHAiOjE3NDc4NzIwMDAsInN1YiI6IjEwNjY0MzM0IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMxNTY0NDEwLCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiOTliNDBlYjAtNWFiMS00Nzc3LWE0M2ItZGRhNmYwMTQ2OGQyIn0.qLlZBWRVd5DHO5fK4RVooCC8AFqX_ew1IbE2bG4GSbT3qV1JIheG98R4yNCfi9kIq6YdQ-aAo-AQEWMeQhpcEBLn2pZxHh-rCXtXj4R9Q74hJYrb2U7YFewApyuu5K4pbAoHze86G4ihB8YDou4Mu7owIbAxDv3-Z2xFyY53QCjspitKNoMenHncwCQm4V8SyQdRLBzsAvnwJthPFVPw1IXVDLvgKgDrF5N7m3qAhsPJHyNPNvGiUrL9-UtSKmFN6KelaFcezGLDxMOBGZ-RXQ8UV3Jqg5i6ve74t1vUf6WO2kMJpKG6iETJlMN1JElae7Pksi4Y5mHPgrGE7AfeoQ",
+const method = "GET";
+const endpoint = "api/v4/leads";
+const subdomain = "johanndelacruz2023";
+const url = `https://${subdomain}.amocrm.ru/${endpoint}`;
+const ACCESS_TOKEN =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIzZmU5YzViMmNmYzFhYzQ3ODMyZDk3ZjcxMjJmNDE3M2Q0NTBiOTdkOTY3MzQzZjRmNGQ1MmVhYTg3MDE4NjgyZmUxN2U0NGQ1ZDBlYWIxIn0.eyJhdWQiOiJjM2QzMWY4Zi1jODY1LTQxMDgtYTdkMS0yYzE1N2U2MGYyOTQiLCJqdGkiOiJiM2ZlOWM1YjJjZmMxYWM0NzgzMmQ5N2Y3MTIyZjQxNzNkNDUwYjk3ZDk2NzM0M2Y0ZjRkNTJlYWE4NzAxODY4MmZlMTdlNDRkNWQwZWFiMSIsImlhdCI6MTcwNzkzNDgxOSwibmJmIjoxNzA3OTM0ODE5LCJleHAiOjE3NDk2ODY0MDAsInN1YiI6IjEwNjY0MzM0IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMxNTY0NDEwLCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiZDQzNzkxMzAtNjJhZS00YTVhLTg4MDQtMDc3YzlhZjk0MWRhIn0.gMyJ2K19-z49waytpjJsLu-chpGaUdvnWV4CAHrdWmBRSFisIVEGGk2M8Or6cT-fqpN9FNfs6wUAUxI8x9l3wu7rZ6zyhCFbHw3WRKtkV1RlWhEmu3JaN8u6Syfx0NcoMFEc4Fo8yRUapgoizGsVaNLd-GKw12tkKtb2_Xe0wNm8bXB6Fn6Pb7QYHiuPT_yS9TZztyTWUJU9UYd5mnuBJfjTzrNFuFcunoeZgtQP4JMvoyzEjcxFOLCoOjQABKqcJcM_Bkq_mlFiUp0yTBbCYO50DvV0d_cODT99kHF4jGhcFpgHw5HCFTxmNFUlpcuUg_JkSYr9U40zltVkIL0fVw";
+const headersList = {
+  Authorization: `Bearer ${ACCESS_TOKEN}`,
 };
-
-let reqOptions = {
+const reqOptions = {
   method: method,
   headers: headersList,
 };
+let currentPage = 1;
+let itemsPerPage = 5;
+let sortOrder = "name-asc";
+
+document
+  .getElementById("items-per-page")
+  .addEventListener("change", function () {
+    itemsPerPage = this.value === "all" ? Infinity : parseInt(this.value);
+    renderDealsTable();
+  });
+
+document.getElementById("order-select").addEventListener("change", function () {
+  sortOrder = this.value;
+  renderDealsTable();
+});
 
 async function fetchDeals() {
   try {
@@ -38,24 +42,73 @@ async function fetchDeals() {
 }
 
 async function renderDealsTable() {
-  const deals = await fetchDeals();
+  let deals = await fetchDeals();
+
+  // Sort deals based on selected order
+  deals = sortDeals(deals, sortOrder);
+
   const dealsBody = document.getElementById("deals-body");
   dealsBody.innerHTML = "";
 
-  deals.forEach((deal) => {
+  const startIndex =
+    itemsPerPage === Infinity ? 0 : (currentPage - 1) * itemsPerPage;
+  const endIndex =
+    itemsPerPage === Infinity
+      ? deals.length
+      : Math.min(startIndex + itemsPerPage, deals.length);  
+
+  for (let i = startIndex; i < endIndex; i++) {
+    const deal = deals[i];
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td class="border px-4 py-2">${deal.name}</td>
-      <td class="border px-4 py-2">${deal.id}</td>
-      <td class="border px-4 py-2">${deal.price}</td>
-      <td class="border px-4 py-2">${deal.created_at}</td>
-      <td class="border px-4 py-2">${deal.updated_at}</td>
-      <td class="border px-4 py-2">${deal.updated_by}</td>
-      <td class="border px-4 py-2">${deal.updated_by}</td>
-      <td class="border px-4 py-2">${deal.responsible_user_id}</td>
+    <td class="border px-4 py-2">${deal.id}</td>
+    <td class="border px-4 py-2">${deal.name}</td>      
+    <td class="border px-4 py-2">${deal.price}</td>
+    <td class="border px-4 py-2">${deal.responsible_user_id}</td>
+    <td class="border px-4 py-2">${deal.group_id}</td>
+    <td class="border px-4 py-2">${deal.status_id}</td>
+    <td class="border px-4 py-2">${deal.pipeline_id}</td>
+    <td class="border px-4 py-2">${deal.created_by}</td>
+    <td class="border px-4 py-2">${deal.updated_by}</td>
+    <td class="border px-4 py-2">${deal.created_at}</td>
+    <td class="border px-4 py-2">${deal.updated_at}</td>      
+    <td class="border px-4 py-2">${deal.account_id}</td>      
     `;
     dealsBody.appendChild(row);
-  });
+  }
+
+  renderPagination(deals.length);
+}
+
+function renderPagination(totalItems) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const paginationButtons = document.getElementById("pagination-buttons");
+  paginationButtons.innerHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.addEventListener("click", function () {
+      currentPage = i;
+      renderDealsTable();
+    });
+    paginationButtons.appendChild(button);
+  }
+}
+
+function sortDeals(deals, order) {
+  switch (order) {
+    case "name-asc":
+      return deals.sort((a, b) => a.name.localeCompare(b.name));
+    case "name-desc":
+      return deals.sort((a, b) => b.name.localeCompare(a.name));
+    case "price-asc":
+      return deals.sort((a, b) => a.price - b.price);
+    case "price-desc":
+      return deals.sort((a, b) => b.price - a.price);
+    default:
+      return deals;
+  }
 }
 
 renderDealsTable();
