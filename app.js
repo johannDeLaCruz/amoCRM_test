@@ -1,31 +1,34 @@
-import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
-let method = "GET"
-let endpoint = "api/v4/leads"
-let subdomain = "johanndelacruz2023"
+let method = "GET";
+let endpoint = "api/v4/leads";
+let subdomain = "johanndelacruz2023";
 let url = `https://${subdomain}.amocrm.ru/${endpoint}`;
 let headersList = {
   Accept: "*/*",
-  "User-Agent": "johann2023",
   "Content-Type": "application/json",
+  "User-Agent": "amoCRM-oAuth-client/1.0",
   Authorization:
-    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjAxNTViOGM5YmQxOTFlZjY4YjE1NTE2MjQ4NzUwOWE5Y2NlZjZmNjBiZjdhZTJhN2JiZmFmN2Q4Y2IxYTEyZGRmNGIwYjA0MjAxMjA0M2Y5In0.eyJhdWQiOiJjM2QzMWY4Zi1jODY1LTQxMDgtYTdkMS0yYzE1N2U2MGYyOTQiLCJqdGkiOiIwMTU1YjhjOWJkMTkxZWY2OGIxNTUxNjI0ODc1MDlhOWNjZWY2ZjYwYmY3YWUyYTdiYmZhZjdkOGNiMWExMmRkZjRiMGIwNDIwMTIwNDNmOSIsImlhdCI6MTcwNzg0MTc2NCwibmJmIjoxNzA3ODQxNzY0LCJleHAiOjE3NTUwNDMyMDAsInN1YiI6IjEwNjY0MzM0IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMxNTY0NDEwLCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiMzRmNzJmMzktNGYzNi00YzcwLWE3ZjAtZDRiYmZlMjYzZDk4In0.bs1I8TGPqB9wzPCkWhuM2ooyQUNhgVo5ClAtgUmkB3-j3E9533uUv0E3T2knful_C1MkXCeABVI_FOng2mn-TzPAc_BlMPj_0807Y56xQsozNi63OaL4-kju6JoRDRE5DNriYFbpJRu_1sRlNibLbLYaXPD7saohfznyscU4wAG5golKcbgZrtivDkc9Z6NoZmSJwBJ3gRBCQwNpL-LI3YPOF5EGmuW2_56JhmntWV4KzFa-Pb3UzEo5vvepmP5TSlwKX95htQStM2B1CbaaTiJu9hLHyLkf6iAzT_EfJ3eQ7v4GMkek6m30w260aGUQOt8yxWzAmXBwyQudzf9WAg",
+    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ4ZTUxNDdiMDJmZWY4ZGUxMDI4Njg3OWRkYWFmM2Y3NGYxMTA3YzM5NGU5ZDMyZjk2NGZkZWRjOGM1NTkwMDA4ZGYyZTc3MjMxMmQ3NmQwIn0.eyJhdWQiOiJjM2QzMWY4Zi1jODY1LTQxMDgtYTdkMS0yYzE1N2U2MGYyOTQiLCJqdGkiOiI0OGU1MTQ3YjAyZmVmOGRlMTAyODY4NzlkZGFhZjNmNzRmMTEwN2MzOTRlOWQzMmY5NjRmZGVkYzhjNTU5MDAwOGRmMmU3NzIzMTJkNzZkMCIsImlhdCI6MTcwNzg3ODUyNywibmJmIjoxNzA3ODc4NTI3LCJleHAiOjE3NDc4NzIwMDAsInN1YiI6IjEwNjY0MzM0IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMxNTY0NDEwLCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiOTliNDBlYjAtNWFiMS00Nzc3LWE0M2ItZGRhNmYwMTQ2OGQyIn0.qLlZBWRVd5DHO5fK4RVooCC8AFqX_ew1IbE2bG4GSbT3qV1JIheG98R4yNCfi9kIq6YdQ-aAo-AQEWMeQhpcEBLn2pZxHh-rCXtXj4R9Q74hJYrb2U7YFewApyuu5K4pbAoHze86G4ihB8YDou4Mu7owIbAxDv3-Z2xFyY53QCjspitKNoMenHncwCQm4V8SyQdRLBzsAvnwJthPFVPw1IXVDLvgKgDrF5N7m3qAhsPJHyNPNvGiUrL9-UtSKmFN6KelaFcezGLDxMOBGZ-RXQ8UV3Jqg5i6ve74t1vUf6WO2kMJpKG6iETJlMN1JElae7Pksi4Y5mHPgrGE7AfeoQ",
 };
 
 let reqOptions = {
-  url: url,
   method: method,
   headers: headersList,
 };
+
 async function fetchDeals() {
   try {
-    const response = await axios.request(reqOptions);
-    console.log(response.data);
-    return response.data._embedded.leads;
+    const response = await fetch(url, reqOptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data._embedded.leads;
   } catch (error) {
     console.error("Error fetching deals:", error);
     return [];
   }
 }
+
 async function renderDealsTable() {
   const deals = await fetchDeals();
   const dealsBody = document.getElementById("deals-body");
@@ -46,4 +49,5 @@ async function renderDealsTable() {
     dealsBody.appendChild(row);
   });
 }
+
 renderDealsTable();
