@@ -42,8 +42,9 @@ async function fetchDeals() {
 }
 
 async function renderDealsTable() {
-  let deals = await fetchDeals();
+  let deals = await fetchDeals();  
   deals = sortDeals(deals, sortOrder);
+
   const dealsBody = document.getElementById("deals-body");
   dealsBody.innerHTML = "";
 

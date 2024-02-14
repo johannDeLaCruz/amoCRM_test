@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
+    <!-- Установка кодировки и масштабирования -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>amoCRM JohannDeLaCruz2023 - СДЕЛКИ</title>    
+    <title>amoCRM JohannDeLaCruz2023 - СДЕЛКИ</title>
+    <!-- Подключение стилей Tailwind CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -12,10 +14,12 @@
   <body class="bg-gray-100 font-sans">
     <div class="container mx-auto mt-10 px-4">
       <h1 class="text-3xl font-bold mb-5 text-center">
-        JohannDeLaCruz - amoCRM Deals
+        JohannDeLaCruz - amoCRM Сделки
       </h1>
+      <!-- Фильтры для отображения сделок -->
       <div class="flex justify-center mb-5">
         <div class="mr-3">
+          <!-- Фильтр по количеству отображаемых сделок -->
           <label for="items-per-page" class="mr-1">Показать:</label>
           <select
             id="items-per-page"
@@ -28,6 +32,7 @@
           </select>
         </div>
         <div>
+          <!-- Фильтр по сортировке сделок -->
           <label for="order-select" class="mr-1">Сортировка:</label>
           <select
             id="order-select"
@@ -40,7 +45,7 @@
           </select>
         </div>
       </div>
-      <!-- Table to display deals -->
+      <!-- Таблица для отображения сделок -->
       <div class="-mx-4">
         <table
           id="deals-table"
@@ -65,18 +70,16 @@
             </tr>
           </thead>
           <tbody id="deals-body">
-            <!-- Deals data will be populated here -->
+            <!-- Данные сделок будут динамически добавлены сюда -->
           </tbody>
         </table>
       </div>
-
-      <!-- Pagination -->
-      <div id="pagination-buttons" class="mt-5 flex justify-center">        <!-- Pagination buttons will be added dynamically here -->
-      
+      <!-- Пагинация -->
+      <div id="pagination-buttons" class="mt-5 flex justify-center">
+        <!-- Кнопки пагинации будут добавлены динамически сюда -->
       </div>
     </div>
-
-    <!-- Include JavaScript -->
+    <!-- Подключение JavaScript -->
     <script type="module" src="app.js"></script>
   </body>
 </html>
