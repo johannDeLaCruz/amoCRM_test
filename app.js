@@ -83,7 +83,6 @@ async function renderDealsTable() {
             <td class="border px-4 py-2">${deal.name}</td>      
             <td class="border px-4 py-2">${deal.price}</td>
             <td class="border px-4 py-2">${deal.responsible_user_id}</td>
-            <td class="border px-4 py-2">${deal.group_id}</td>
             <td class="border px-4 py-2">${deal.status_id}</td>
             <td class="border px-4 py-2">${deal.pipeline_id}</td>
             <td class="border px-4 py-2">${deal.created_by}</td>
