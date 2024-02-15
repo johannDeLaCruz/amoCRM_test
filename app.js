@@ -1,3 +1,18 @@
+/*
+Код будет работать с отключенным CORS в браузере или через прокси,
+который добавит нужные заголовки.
+Сервер API не возвращает заголовки Access-Control-Allow-* 
+необходимые для работы с разными источниками такие, как
+Access-Control-Allow-Headers: authorization
+Access-Control-Allow-Methods: PATCH, GET, POST
+Access-Control-Allow-Origin: *
+
+Для этого может быть использован плагин для Хрома 
+"Allow CORS: Access-Control-Allow-Origin" 
+https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/
+(не забудьте в настройках плагина добавить "Access-Control-Allow-Header")
+
+*/
 const method = "GET"; // Метод запроса
 const endpoint = "api/v4/leads"; // API endpoint
 const subdomain = "johanndelacruz2023"; // Поддомен
