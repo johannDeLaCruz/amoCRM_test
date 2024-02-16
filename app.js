@@ -45,24 +45,86 @@ document.getElementById("order-select").addEventListener("change", function () {
   renderDealsTable();
 });
 
-// Асинхронная функция для получения сделок
-async function fetchDeals() {
+async function fetchDealsInBatches(dealsBody) {
+  let page = 1; // Start from page 1
+
   try {
-    const response = await fetch(url, reqOptions); // Отправка запроса
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`); // Обработка ошибок
+    while (true) {
+      const response = await fetch(`${url}?limit=5&page=${page}`, reqOptions); // Fetch deals for the current page
+      console.log("Response:", response); // Log the response
+
+      if (response.status === 204) {
+        break; // If no more content, break the loop
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json(); // Extract JSON data from response
+      console.log("Data:", data); // Log the data
+
+      const deals = data._embedded.leads; // Extract deals from JSON data
+
+      if (deals.length === 0) {
+        break; // If no more deals, break the loop
+      }
+
+      renderDealsBatch(deals, dealsBody); // Render the batch of fetched deals
+      page++; // Move to the next page
+
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 500 milliseconds before making the next request
     }
-    const data = await response.json(); // Получение данных
-    return data._embedded.leads; // Возвращение списка сделок
   } catch (error) {
-    console.error("Error fetching deals:", error); // Вывод ошибки в консоль
-    return [];
+    console.error("Error fetching deals:", error);
   }
 }
 
+// Function to render a batch of fetched deals
+function renderDealsBatch(deals, dealsBody) {
+  deals.forEach(deal => {
+    const row = document.createElement("tr"); // Create a table row
+    // Fill the row with deal data
+    row.innerHTML = `
+      <td class="border px-4 py-2">${deal.id}</td>
+      <td class="border px-4 py-2">${deal.name}</td>      
+      <td class="border px-4 py-2">${deal.price}</td>
+      <td class="border px-4 py-2">${deal.responsible_user_id}</td>
+      <td class="border px-4 py-2">${deal.status_id}</td>
+      <td class="border px-4 py-2">${deal.pipeline_id}</td>
+      <td class="border px-4 py-2">${deal.created_by}</td>
+      <td class="border px-4 py-2">${deal.updated_by}</td>
+      <td class="border px-4 py-2">${deal.created_at}</td>
+      <td class="border px-4 py-2">${deal.updated_at}</td>      
+      <td class="border px-4 py-2">${deal.account_id}</td>      
+    `;
+    dealsBody.appendChild(row); // Add the row to the table body
+    row.classList.add("transition", "ease-in-out", "transform", "hover:bg-gray-50"); // Add classes for styling
+  });
+}
+
+// Modify fetchDeals function to use fetchDealsInBatches when itemsPerPage is Infinity
+async function fetchDeals(dealsBody) {
+  if (itemsPerPage === Infinity) {
+    await fetchDealsInBatches(dealsBody); // Fetch deals in batches
+    return []; // Return an empty array as the actual rendering is done in real-time
+  } else {
+    try {
+      const response = await fetch(url, reqOptions);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data._embedded.leads;
+    } catch (error) {
+      console.error("Error fetching deals:", error);
+      return [];
+    }
+  }
+}
 // Асинхронная функция для отображения таблицы сделок
 async function renderDealsTable() {
-  let deals = await fetchDeals(); // Получение списка сделок
+  let deals = await fetchDeals(document.getElementById("deals-body")); // Получение списка сделок
   deals = sortDeals(deals, sortOrder); // Сортировка сделок
 
   const dealsBody = document.getElementById("deals-body"); // Получение тела таблицы
