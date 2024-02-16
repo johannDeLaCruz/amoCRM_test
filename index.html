@@ -13,71 +13,89 @@
   </head>
   <body class="bg-gray-100 font-sans">
     <div class="container mx-auto mt-10 px-4">
-      <h1 class="text-3xl font-bold mb-5 text-center">
-        JohannDeLaCruz - amoCRM Сделки
-      </h1>
-      <!-- Фильтры для отображения сделок -->
-      <div class="flex justify-center mb-5">
-        <div class="mr-3">
-          <!-- Фильтр по количеству отображаемых сделок -->
-          <label for="items-per-page" class="mr-1">Показать:</label>
-          <select
-            id="items-per-page"
-            class="border border-gray-300 rounded px-3 py-1"
-          >
-            <option value="2">2</option>
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
-            <option value="all">Все</option>
-          </select>
+      <header>
+        <h1 class="text-3xl font-bold mb-5 text-center">
+          JohannDeLaCruz - amoCRM Сделки
+        </h1>
+        <!-- Фильтры для отображения сделок -->
+        <div class="flex justify-center mb-5">
+          <div class="mr-3">
+            <!-- Фильтр по количеству отображаемых сделок -->
+            <label for="items-per-page" class="mr-1">Показать:</label>
+            <select
+              id="items-per-page"
+              class="border border-gray-300 rounded px-3 py-1"
+            >
+              <option value="2">2</option>
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+              <option value="all">Все</option>
+            </select>
+          </div>
+          <div>
+            <!-- Фильтр по сортировке сделок -->
+            <label for="order-select" class="mr-1">Сортировка:</label>
+            <select
+              id="order-select"
+              class="border border-gray-300 rounded px-3 py-1"
+            >
+              <option value="name-asc" selected>Название (А-Я)</option>
+              <option value="name-desc">Название (Я-А)</option>
+              <option value="price-asc">Бюджет (0-9)</option>
+              <option value="price-desc">Бюджет (9-0)</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <!-- Фильтр по сортировке сделок -->
-          <label for="order-select" class="mr-1">Сортировка:</label>
-          <select
-            id="order-select"
-            class="border border-gray-300 rounded px-3 py-1"
-          >
-            <option value="name-asc" selected>Название (А-Я)</option>
-            <option value="name-desc">Название (Я-А)</option>
-            <option value="price-asc">Бюджет (0-9)</option>
-            <option value="price-desc">Бюджет (9-0)</option>
-          </select>
-        </div>
-      </div>
+      </header>
       <!-- Таблица для отображения сделок -->
-      <div class="-mx-4">
-        <table
-          id="deals-table"
-          class="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden"
-        >
-          <thead class="bg-gray-200">
-            <tr>
-              <th class="px-4 py-2">ID сделки</th>
-              <th class="px-4 py-2">Название сделки</th>
-              <th class="px-4 py-2">Бюджет сделки</th>
-              <th class="px-4 py-2">
-                ID пользователя, ответственного за сделку
-              </th>
-              <th class="px-4 py-2">ID статуса</th>
-              <th class="px-4 py-2">ID воронки</th>
-              <th class="px-4 py-2">ID пользователя, создающий сделку</th>
-              <th class="px-4 py-2">ID пользователя, изменяющий сделку</th>
-              <th class="px-4 py-2">Дата создания сделки</th>
-              <th class="px-4 py-2">Дата изменения сделки</th>
-              <th class="px-4 py-2">ID аккаунта, в котором находится сделка</th>
-            </tr>
-          </thead>
-          <tbody id="deals-body">
-            <!-- Данные сделок будут динамически добавлены сюда -->
-          </tbody>
-        </table>
-      </div>
-      <!-- Пагинация -->
-      <div id="pagination-buttons" class="mt-5 flex justify-center">
-        <!-- Кнопки пагинации будут добавлены динамически сюда -->
-      </div>
+      <main>
+        <div class="-mx-4">
+          <table
+            id="deals-table"
+            class="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden"
+          >
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="px-4 py-2">ID сделки</th>
+                <th class="px-4 py-2">Название сделки</th>
+                <th class="px-4 py-2">Бюджет сделки</th>
+                <th class="px-4 py-2">
+                  ID пользователя, ответственного за сделку
+                </th>
+                <th class="px-4 py-2">ID статуса</th>
+                <th class="px-4 py-2">ID воронки</th>
+                <th class="px-4 py-2">ID пользователя, создающий сделку</th>
+                <th class="px-4 py-2">ID пользователя, изменяющий сделку</th>
+                <th class="px-4 py-2">Дата создания сделки</th>
+                <th class="px-4 py-2">Дата изменения сделки</th>
+                <th class="px-4 py-2">
+                  ID аккаунта, в котором находится сделка
+                </th>
+              </tr>
+            </thead>
+            <tbody id="deals-body">
+              <!-- Данные сделок будут динамически добавлены сюда -->
+            </tbody>
+          </table>
+        </div>
+        <!-- Пагинация -->
+        <div id="pagination-buttons" class="mt-5 flex justify-center">
+          <!-- Кнопки пагинации будут добавлены динамически сюда -->
+        </div>
+      </main>
     </div>
+    <footer class="container mx-auto mt-12">
+      <small>
+        Если сделки не отображаются, используйте плагин для Хрома
+        <a
+          class="text-blue-400 hover:text-blue-300"
+          href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/"
+          >"Allow CORS: Access-Control-Allow-Origin"</a
+        >
+        (не забудьте в настройках плагина добавить
+        "Access-Control-Allow-Header")
+      </small>
+    </footer>
     <!-- Подключение JavaScript -->
     <script type="module" src="app.js"></script>
   </body>
