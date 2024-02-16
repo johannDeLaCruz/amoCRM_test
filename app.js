@@ -45,47 +45,39 @@ document.getElementById("order-select").addEventListener("change", function () {
 });
 
 async function fetchDealsInBatches(dealsBody) {
-  let page = 1; // Start from page 1
-  let allDeals = []; // Accumulate all fetched deals
-
+  let page = 1;
+  let allDeals = [];
   try {
     while (true) {
       const response = await fetch(`${url}?limit=5&page=${page}`, reqOptions); // Fetch deals for the current page
-      console.log("Response:", response); // Log the response
-
+      console.log("Response:", response);
       if (response.status === 204) {
-        break; // If no more content, break the loop
+        break; // Если больше нет контента, выйти из цикла
       }
-
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      const data = await response.json(); // Extract JSON data from response
-      console.log("Data:", data); // Log the data
-
-      const deals = data._embedded.leads; // Extract deals from JSON data
-      allDeals.push(...deals); // Add fetched deals to the accumulated array
-
+      const data = await response.json();
+      console.log("Data:", data);
+      const deals = data._embedded.leads;
+      allDeals.push(...deals); // Добавить полученные сделки в массив
       if (deals.length === 0) {
-        break; // If no more deals, break the loop
+        break;
       }
-
-      page++; // Move to the next page
-
-      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 500 milliseconds before making the next request
+      page++;
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Подождать 500 миллисекунд перед следующим запросом
     }
   } catch (error) {
     console.error("Error fetching deals:", error);
   }
-
-  return allDeals; // Return all fetched deals
+  return allDeals;
 }
-// Function to render a batch of fetched deals
+
+// Функция для отображения пакета полученных сделок
 function renderDealsBatch(deals, dealsBody) {
-  deals.forEach(deal => {
-    const row = document.createElement("tr"); // Create a table row
-    // Fill the row with deal data
+  deals.forEach((deal) => {
+    const row = document.createElement("tr"); // Создать строку таблицы
+    // Заполнить строку данными о сделке
     row.innerHTML = `
       <td class="border px-4 py-2">${deal.id}</td>
       <td class="border px-4 py-2">${deal.name}</td>      
@@ -99,15 +91,19 @@ function renderDealsBatch(deals, dealsBody) {
       <td class="border px-4 py-2">${deal.updated_at}</td>      
       <td class="border px-4 py-2">${deal.account_id}</td>      
     `;
-    dealsBody.appendChild(row); // Add the row to the table body
-    row.classList.add("transition", "ease-in-out", "transform", "hover:bg-gray-50"); // Add classes for styling
+    dealsBody.appendChild(row); // Добавить строку в тело таблицы
+    row.classList.add(
+      "transition",
+      "ease-in-out",
+      "transform",
+      "hover:bg-gray-50"
+    ); // Добавить классы для стилизации
   });
 }
 
-// Modify fetchDeals function to use fetchDealsInBatches when itemsPerPage is Infinity
 async function fetchDeals(dealsBody) {
   if (itemsPerPage === Infinity) {
-    return await fetchDealsInBatches(dealsBody); // Return the result of fetchDealsInBatches
+    return await fetchDealsInBatches(dealsBody);
   } else {
     try {
       const response = await fetch(url, reqOptions);
@@ -140,7 +136,7 @@ async function renderDealsTable() {
   for (let i = startIndex; i < endIndex; i++) {
     const deal = deals[i]; // Получение сделки
     const row = document.createElement("tr"); // Создание строки таблицы
-     // Convert Unix timestamps to human-readable dates
+    // Convert Unix timestamps to human-readable dates
     const createdDate = new Date(deal.created_at * 1000).toLocaleString();
     const updatedDate = new Date(deal.updated_at * 1000).toLocaleString();
     // Заполнение строки данными о сделке
@@ -180,7 +176,7 @@ function renderPagination(totalItems) {
     button.textContent = i; // Установка текста кнопки
     button.classList.add(
       "bg-blue-500",
-      "hover:bg-blue-600",  
+      "hover:bg-blue-600",
       "text-white",
       "font-bold",
       "py-2",
