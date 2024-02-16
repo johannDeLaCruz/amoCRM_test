@@ -47,6 +47,7 @@ document.getElementById("order-select").addEventListener("change", function () {
 
 async function fetchDealsInBatches(dealsBody) {
   let page = 1; // Start from page 1
+  let allDeals = []; // Accumulate all fetched deals
 
   try {
     while (true) {
@@ -65,12 +66,12 @@ async function fetchDealsInBatches(dealsBody) {
       console.log("Data:", data); // Log the data
 
       const deals = data._embedded.leads; // Extract deals from JSON data
+      allDeals.push(...deals); // Add fetched deals to the accumulated array
 
       if (deals.length === 0) {
         break; // If no more deals, break the loop
       }
 
-      renderDealsBatch(deals, dealsBody); // Render the batch of fetched deals
       page++; // Move to the next page
 
       await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 500 milliseconds before making the next request
@@ -78,8 +79,9 @@ async function fetchDealsInBatches(dealsBody) {
   } catch (error) {
     console.error("Error fetching deals:", error);
   }
-}
 
+  return allDeals; // Return all fetched deals
+}
 // Function to render a batch of fetched deals
 function renderDealsBatch(deals, dealsBody) {
   deals.forEach(deal => {
@@ -106,8 +108,7 @@ function renderDealsBatch(deals, dealsBody) {
 // Modify fetchDeals function to use fetchDealsInBatches when itemsPerPage is Infinity
 async function fetchDeals(dealsBody) {
   if (itemsPerPage === Infinity) {
-    await fetchDealsInBatches(dealsBody); // Fetch deals in batches
-    return []; // Return an empty array as the actual rendering is done in real-time
+    return await fetchDealsInBatches(dealsBody); // Return the result of fetchDealsInBatches
   } else {
     try {
       const response = await fetch(url, reqOptions);
