@@ -11,7 +11,6 @@ Access-Control-Allow-Origin: *
 "Allow CORS: Access-Control-Allow-Origin" 
 https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/
 (не забудьте в настройках плагина добавить "Access-Control-Allow-Header")
-
 */
 const method = "GET"; // Метод запроса
 const endpoint = "api/v4/leads"; // API endpoint
@@ -141,6 +140,9 @@ async function renderDealsTable() {
   for (let i = startIndex; i < endIndex; i++) {
     const deal = deals[i]; // Получение сделки
     const row = document.createElement("tr"); // Создание строки таблицы
+     // Convert Unix timestamps to human-readable dates
+    const createdDate = new Date(deal.created_at * 1000).toLocaleString();
+    const updatedDate = new Date(deal.updated_at * 1000).toLocaleString();
     // Заполнение строки данными о сделке
     row.innerHTML = `
             <td class="border px-4 py-2">${deal.id}</td>
@@ -151,8 +153,8 @@ async function renderDealsTable() {
             <td class="border px-4 py-2">${deal.pipeline_id}</td>
             <td class="border px-4 py-2">${deal.created_by}</td>
             <td class="border px-4 py-2">${deal.updated_by}</td>
-            <td class="border px-4 py-2">${deal.created_at}</td>
-            <td class="border px-4 py-2">${deal.updated_at}</td>      
+            <td class="border px-4 py-2">${createdDate}</td>
+            <td class="border px-4 py-2">${updatedDate}</td>      
             <td class="border px-4 py-2">${deal.account_id}</td>      
         `;
     dealsBody.appendChild(row); // Добавление строки в тело таблицы
@@ -178,7 +180,7 @@ function renderPagination(totalItems) {
     button.textContent = i; // Установка текста кнопки
     button.classList.add(
       "bg-blue-500",
-      "hover:bg-blue-600",
+      "hover:bg-blue-600",  
       "text-white",
       "font-bold",
       "py-2",
